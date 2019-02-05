@@ -17,7 +17,7 @@
 const removeMaxNumberFromArray = _numbers => {
   //関数定義
   const copyArray = _numbers.slice(); // 新しい参照先を作成して代入
-  let checkNum = copyArray[0]; // 配列の先頭からチェックするので判定基準を先頭にセット
+  let checkNum = 0; // 配列の先頭からチェックするので判定基準を先頭にセット
   let removeIndex; // 値が最大値の時のインデックス番号
   copyArray.forEach((number, index) => {
     // 配列の値と基準点を反復判定して値が大きければ値を更新
