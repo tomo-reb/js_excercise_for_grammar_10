@@ -14,7 +14,30 @@
  *     - removeMaxNumberFromArray関数を実行した後の配列numbersの内容は [10, 500, 234, 965, 221] のままである
  */
 
+const removeMaxNumberFromArray = _numbers => {
+  //関数定義
+  const copyArray = _numbers.slice(); // 新しい参照先を作成して代入
+  let checkNum = copyArray[0]; // 配列の先頭からチェックするので判定基準を先頭にセット
+  let removeIndex = 0; // 配列のインデックスも先頭に設定
+  copyArray.forEach((number, index) => {
+    // 配列の値と基準点を反復判定して値が大きければ値を更新
+    if (checkNum < number) {
+      checkNum = number;
+      removeIndex = index;
+    }
+  });
+  copyArray.splice(removeIndex, 1); //配列から目的のインデックスを削除
+  return copyArray; //関数に値を返す
+};
 
+const numbers = [10, 500, 234, 965, 221];
+const returnedNumbers = removeMaxNumberFromArray(numbers);
+
+console.log('numbersの内容は [10, 500, 234, 965, 221] であるべき : ', numbers);
+console.log(
+  'returnedNumbersの内容は [10, 500, 234, 221] であるべき : ',
+  returnedNumbers
+);
 
 /**
  * 課題2: 数値が格納されている配列を引数で受け取り、小さい順に並べ替える
@@ -34,3 +57,32 @@
  *     - 「Array.prototype.sort()」を使う
  *       - https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Array/sort
  */
+
+// .sortの中の動きが公式だけだと掴めませんでしたがこちらのサイトで内部処理のイメージができました
+// https://lab.syncer.jp/Web/JavaScript/Reference/Global_Object/Array/prototype/sort/
+
+const sortNumbers = _numbers => {
+  const copyArray = _numbers.slice(); //新しい参照先を作成して代入
+  copyArray.sort((a, b) => {
+    if (a < b) {
+      return -1;
+    }
+    if (a > b) {
+      return 1;
+    }
+    return 0;
+  });
+  return copyArray;
+};
+
+const beforeSortNumbers = [1000, 10, 500, 234, 965, 221, 102];
+const afterSortNumbers = sortNumbers(beforeSortNumbers);
+
+console.log(
+  'beforeSortNumbersの内容は [1000, 10, 500, 234, 965, 221, 102] であるべき : ',
+  beforeSortNumbers
+);
+console.log(
+  'afterSortNumbersの内容は [10, 102, 221, 234, 500, 965, 1000] であるべき : ',
+  afterSortNumbers
+);
